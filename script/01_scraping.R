@@ -48,5 +48,13 @@ articles_df <- do.call(rbind, newArticles)
 #Create new column diet_check
 articles_df$diet_check <- NA
 
-
+#Check body text for query
+for (i in 1:nrow(articles_df)){
+  if(any(str_detect(articles_df$body_text[i], query))) {
+    articles_df$diet_check[i]<- TRUE
+  } 
+  else {
+    articles_df$diet_check[i]<- FALSE
+  }
+} 
 
