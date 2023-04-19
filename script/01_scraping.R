@@ -1,5 +1,5 @@
 library(guardianapi)
-
+library(tidyverse)
 #set API key
 api_key <- rstudioapi::askForPassword()
 Sys.setenv(GU_API_KEY = api_key) 
@@ -57,4 +57,10 @@ for (i in 1:nrow(articles_df)){
     articles_df$diet_check[i]<- FALSE
   }
 } 
+
+#Cleaning data
+articles_clean<- articles_df %>% 
+  filter(diet_check == TRUE)
+
+
 
