@@ -12,6 +12,7 @@ to_date <- "2023-04-19"
 
 # Get articles for each query
 
+### VEGAN
 res_vegan<- gu_content(apiKey = api_key,
                       query = "vegan",
                       from = from_date,
@@ -26,5 +27,24 @@ for (i in 1:nrow(res_vegan)){
   } 
   else {
     res_vegan$diet[i]<- FALSE
+  }
+}
+
+### PALEO
+
+res_paleo<- gu_content(apiKey = api_key,
+                       query = "paleo",
+                       from = from_date,
+                       to = to_date)
+#Create add column
+res_paleo$diet<- NA
+
+#Checking body text
+for (i in 1:nrow(res_paleo)){
+  if(any(str_detect(res_vegan$body_text[i], "paleo"))) {
+    res_paleo$diet[i]<- TRUE
+  } 
+  else {
+    res_paleo$diet[i]<- FALSE
   }
 }
