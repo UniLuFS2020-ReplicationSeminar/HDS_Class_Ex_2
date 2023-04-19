@@ -48,3 +48,22 @@ for (i in 1:nrow(res_paleo)){
     res_paleo$diet[i]<- FALSE
   }
 }
+
+### Keto
+
+res_keto <- gu_content(apiKey = api_key,
+                       query = "keto",
+                       from = from_date,
+                       to = to_date)
+#Create add column
+res_keto$diet<- NA
+
+#Checking body text
+for (i in 1:nrow(res_keto)){
+  if(any(str_detect(res_keto$body_text[i], "keto"))) {
+    res_keto$diet[i]<- TRUE
+  } 
+  else {
+    res_keto$diet[i]<- FALSE
+  }
+}
