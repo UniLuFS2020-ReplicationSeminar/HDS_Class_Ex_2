@@ -1,0 +1,32 @@
+---
+title: "Trends for three types of diet in Guardian magazine"
+author: "Viktoriia Tantsiura, Valeriia Zinoveva, Mercédesz Lehoczky"
+output: html_document
+date: "Last edited `r Sys.time()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  warning = FALSE, 
+  message = FALSE, 
+  dpi = 300)
+```
+
+```{r data, include = FALSE}
+library(readr)
+library(rio)
+library(ggplot2)
+library(tidyverse)
+library(Hmisc)
+library(broom)
+library(ggpubr)
+library(corrplot)
+```
+
+# Title
+
+For Class Exercise 2 we scraped articles from [the Guardian magazine](https://www.theguardian.com/international).  ![](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/3/17/1426593160681/14df77c1-13c1-43d0-8dea-bbd1ac0df050-bestSizeAvailable.jpeg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=53d9228653e910b2d5c0c01e882d6d1b)
+
+
+
