@@ -19,4 +19,12 @@ res_vegan<- gu_content(apiKey = api_key,
 #Create add column
 res_vegan$diet<- NA
 
-
+#Checking body text
+for (i in 1:nrow(res_vegan)){
+  if(any(str_detect(res_vegan$body_text[i], "vegan"))) {
+    res_vegan$diet[i]<- TRUE
+  } 
+  else {
+    res_vegan$diet[i]<- FALSE
+  }
+}
