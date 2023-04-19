@@ -16,5 +16,7 @@ res_vegan<- gu_content(apiKey = api_key,
                       query = "vegan",
                       from = from_date,
                       to = to_date)
- 
+#Create add column
+res_vegan$diet<- NA
+
 
