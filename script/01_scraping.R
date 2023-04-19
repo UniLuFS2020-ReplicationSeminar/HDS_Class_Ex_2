@@ -17,10 +17,20 @@ for (q in query) {
                     query = q,
                     from = from_date,
                     to = to_date)
-  # Add a column indicating the diet type
+# Add a column indicating the diet type
   res$diet_found <- q
   articles[[q]] <- res
 }
 
 #column names
 col_names <- lapply(articles, colnames)
+
+#Checking common columns
+common_cols <- Reduce(intersect, col_names)
+for (df_name in names(articles)) {
+  extra_cols <- setdiff(col_names[[df_name]], common_cols)
+  if (length(extra_cols) > 0) {
+    message(paste0("The following columns are in ", df_name, " but not in the other data frames: ", 
+                   paste(extra_cols, collapse = ", ")))
+  }
+}
