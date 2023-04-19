@@ -21,3 +21,6 @@ for (q in query) {
   res$diet_found <- q
   articles[[q]] <- res
 }
+
+#column names
+col_names <- lapply(articles, colnames)
