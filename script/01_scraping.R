@@ -1,5 +1,6 @@
 library(guardianapi)
 library(tidyverse)
+
 #set API key
 api_key <- rstudioapi::askForPassword()
 Sys.setenv(GU_API_KEY = api_key) 
@@ -62,5 +63,12 @@ for (i in 1:nrow(articles_df)){
 articles_clean<- articles_df %>% 
   filter(diet_check == TRUE)
 
+### FILTERING 
 
+#Add year and month separately
+articles <- articles_clean %>%
+  mutate(year = format(as.Date(articles_clean$web_publication_date, format = "%Y-%m-%d"), "%Y"))
+
+articles <- articles %>%
+  mutate(month = format(as.Date(articles_clean$web_publication_date, format = "%Y-%m-%d"), "%m"))
 
