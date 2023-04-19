@@ -44,3 +44,9 @@ for (i in 1:length(articles)) {
 
 #Create df from list
 articles_df <- do.call(rbind, newArticles)
+
+#Create new column diet_check
+articles_df$diet_check <- NA
+
+
+
