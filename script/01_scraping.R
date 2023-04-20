@@ -84,3 +84,22 @@ articles$production_office <- as.factor(articles$production_office)
 articles$publication <- as.factor(articles$publication)
 articles$legally_sensitive <- as.factor(articles$legally_sensitive)
 
+
+### PLOTS 
+
+#Number of articles by diet altogether
+#Create count of articles by year for plotting
+count_by_diet <- articles %>%
+  group_by(diet_found) %>%
+  tally()
+
+#Plot Articles published by topic
+barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
+        col = c("red", "orange", "lightgreen"),
+        horiz = TRUE,
+        ylab="Topics", 
+        xlab="Count", 
+        main="Articles published by topic", 
+        xlim=c(0,5500)
+)
+
