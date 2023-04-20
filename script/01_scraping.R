@@ -89,13 +89,13 @@ articles$legally_sensitive <- as.factor(articles$legally_sensitive)
 coloriser <- function(df) { 
   for( i in 1:nrow(df)) {
    if (df[i, ]$diet_found == 'vegan'  ) {
-     df[i, ]$color <- "lightgreen"
+     df[i, ]$color <- "chartreuse3"
    } 
    else { if (df[i, ]$diet_found == 'keto' ) {
      df[i, ]$color <- "red"
    }
       else { if (df[i, ]$diet_found == 'paleo' ) {
-       df[i, ]$color <- "orange"
+       df[i, ]$color <- "cyan"
      }
       }} }
   return(df)
@@ -122,3 +122,4 @@ barplot(height=count_by_diet$n, names=count_by_diet$diet_found,
         main="Articles published by topic", 
         xlim=c(0,5500)
 )
+
