@@ -2,6 +2,7 @@ library(guardianapi)
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
+library(here)
 
 #set API key
 api_key <- rstudioapi::askForPassword()
@@ -113,6 +114,8 @@ count_by_diet <- articles %>%
 count_by_diet$color <- NA
 count_by_diet <- coloriser(count_by_diet)
 
+# Arrange margins
+par(mar = c(5.1, 4.1, 6.1, 1.1))
 #Plot Articles published by topic
 barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
         col = count_by_diet$color,
@@ -121,8 +124,9 @@ barplot(height=count_by_diet$n, names=count_by_diet$diet_found,
         xlab="Count", 
         main="Articles published by topic", 
         xlim=c(0,5500)
-)
-
+) %>% 
+  text(x = 500 , paste(count_by_diet$n, sep="", cex = 1) )
+ 
 
 #Articles by topic and year
 
@@ -135,15 +139,21 @@ count_year_by_topic <- articles %>%
 count_year_by_topic$color <- NA
 count_year_by_topic <- coloriser(count_year_by_topic)
 
+# Arrange margins
+par(mar = c(5.1, 4.1, 6.1, 1.1))
+#Plot and legend articles by year and topic
 barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
         col = count_year_by_topic$color,
         horiz = FALSE,
         ylab="Count", 
         xlab="Years", 
         main="Articles published by year and topic", 
-        ylim=c(0,500)
-)
+        ylim=c(0,800)
+) %>% 
+text(count_year_by_topic$n+15 , paste(count_year_by_topic$n, sep="") ,cex=1) 
+
 legend("topleft",
        c("Keto","Paleo", "Vegan"),
        fill = c("red","cyan", "chartreuse3")
 )
+
