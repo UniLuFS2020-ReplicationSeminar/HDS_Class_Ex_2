@@ -1,5 +1,7 @@
 library(guardianapi)
 library(tidyverse)
+library(ggplot2)
+
 
 #set API key
 api_key <- rstudioapi::askForPassword()
@@ -71,4 +73,14 @@ articles <- articles_clean %>%
 
 articles <- articles %>%
   mutate(month = format(as.Date(articles_clean$web_publication_date, format = "%Y-%m-%d"), "%m"))
+
+## Arranging data for visualisation
+articles$year <- as.factor(articles$year)
+articles$diet_found <- as.factor(articles$diet_found)
+articles$section_name <- as.factor(articles$section_name)
+articles$byline <- as.factor(articles$byline)
+articles$wordcount <- as.numeric(articles$wordcount)
+articles$production_office <- as.factor(articles$production_office)
+articles$publication <- as.factor(articles$publication)
+articles$legally_sensitive <- as.factor(articles$legally_sensitive)
 
