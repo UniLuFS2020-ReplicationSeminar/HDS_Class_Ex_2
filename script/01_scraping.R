@@ -1,7 +1,7 @@
 library(guardianapi)
 library(tidyverse)
 library(ggplot2)
-
+library(dplyr)
 
 #set API key
 api_key <- rstudioapi::askForPassword()
@@ -65,7 +65,7 @@ for (i in 1:nrow(articles_df)){
 articles_clean<- articles_df %>% 
   filter(diet_check == TRUE)
 
-### FILTERING 
+### CLEANING UP
 
 #Add year and month separately
 articles <- articles_clean %>%
@@ -85,6 +85,23 @@ articles$publication <- as.factor(articles$publication)
 articles$legally_sensitive <- as.factor(articles$legally_sensitive)
 
 
+#Adding colors to dataframe (labels to colors) function
+coloriser <- function(df) { 
+  for( i in 1:nrow(df)) {
+   if (df[i, ]$diet_found == 'vegan'  ) {
+     df[i, ]$color <- "lightgreen"
+   } 
+   else { if (df[i, ]$diet_found == 'keto' ) {
+     df[i, ]$color <- "red"
+   }
+      else { if (df[i, ]$diet_found == 'paleo' ) {
+       df[i, ]$color <- "orange"
+     }
+      }} }
+  return(df)
+}
+
+
 ### PLOTS 
 
 #Number of articles by diet altogether
@@ -93,13 +110,15 @@ count_by_diet <- articles %>%
   group_by(diet_found) %>%
   tally()
 
+count_by_diet$color <- NA
+count_by_diet <- coloriser(count_by_diet)
+
 #Plot Articles published by topic
 barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
-        col = c("red", "orange", "lightgreen"),
+        col = count_by_diet$color,
         horiz = TRUE,
         ylab="Topics", 
         xlab="Count", 
         main="Articles published by topic", 
         xlim=c(0,5500)
 )
-
