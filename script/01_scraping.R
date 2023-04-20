@@ -123,3 +123,27 @@ barplot(height=count_by_diet$n, names=count_by_diet$diet_found,
         xlim=c(0,5500)
 )
 
+
+#Articles by topic and year
+
+#Create empty dataframe with columns year, diet topic and count
+#Count topic occurrences by year
+count_year_by_topic <- articles %>%
+  group_by(year, diet_found) %>%
+  tally()
+
+count_year_by_topic$color <- NA
+count_year_by_topic <- coloriser(count_year_by_topic)
+
+barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
+        col = count_year_by_topic$color,
+        horiz = FALSE,
+        ylab="Count", 
+        xlab="Years", 
+        main="Articles published by year and topic", 
+        ylim=c(0,500)
+)
+legend("topleft",
+       c("Keto","Paleo", "Vegan"),
+       fill = c("red","cyan", "chartreuse3")
+)
