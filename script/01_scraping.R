@@ -59,11 +59,11 @@ for (i in 1:nrow(articles_df)){
 } 
 
 #Cleaning data
-articles_clean <- articles_df %>%
-  filter(diet_check == TRUE) %>%
-  group_by(id) %>%
-  filter(n() == 1) %>%
-  ungroup()
+ articles_clean <- articles_df %>%
+    filter(diet_check == TRUE) %>%
+    group_by(id) %>%
+    filter(n() == 1) %>%
+    ungroup()
 
 ### CLEANING UP
 
@@ -156,3 +156,12 @@ legend("topleft",
        fill = c("red","cyan", "chartreuse3")
 )
 
+######## Sentiment analysis ##########
+
+# Clean and preprocess data for SA
+text_clean <- articles_clean %>%
+  mutate(body_text = str_to_lower(body_text)) %>%
+  unnest_tokens(word, body_text) %>% 
+  anti_join(stop_words) %>%
+  group_by(id) %>%
+  summarize(cleaned_text = paste(word, collapse = " "))
