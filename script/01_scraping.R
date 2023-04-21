@@ -39,15 +39,11 @@ for (df_name in names(articles)) {
   }
 }
 
-#Create new list with common columns
-newArticles <- list()
-for (i in 1:length(articles)) {
-  new_list = subset(articles[[i]],TRUE, common_cols)
-  newArticles[[i]]= new_list
-}
-
-#Create df from list
-articles_df <- do.call(rbind, newArticles)
+#Create df with common columns
+articles_df <- articles %>%
+  lapply(subset, select = common_cols) %>%
+  setNames(seq_along(.)) %>%
+  bind_rows()
 
 #Create new column diet_check
 articles_df$diet_check <- NA
