@@ -1,0 +1,29 @@
+---
+title: "Trends for three types of diet in Guardian magazine"
+author: "Viktoriia Tantsiura, Valeriia Zinoveva, Mercédesz Lehoczky"
+output: html_document
+date: "Last edited `r Sys.time()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  warning = FALSE, 
+  message = FALSE, 
+  dpi = 300)
+```
+
+# Introduction
+
+For Class Exercise 2 we scraped articles from [the Guardian magazine](https://www.theguardian.com/international) about three diets of our own interest to see thends in populaity for each of them.  ![](https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/3/17/1426593160681/14df77c1-13c1-43d0-8dea-bbd1ac0df050-bestSizeAvailable.jpeg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=53d9228653e910b2d5c0c01e882d6d1b)
+
+## Data Collection
+
+To gather data on articles related to specific diets, we scraped articles from The Guardian website that contained keywords "vegan", "paleo", or "keto" from the years 2000 to 2023. The data manipulation and cleaning was performed using R scripts 01-03 in relevant folder.
+
+
+## Data visualization 
+
+To gain insights into the popularity of these diets over time, we performed an analysis (R script 04) to visualize the number of articles related to each diet that were published in The Guardian from 2000 to 2023. This analysis helped us better understand the trends and changes in the discourse around these diets.
+
+
