@@ -127,7 +127,6 @@ barplot(height=count_by_diet$n, names=count_by_diet$diet_found,
 ) %>% 
   text(x = 500 , paste(count_by_diet$n, sep="", cex = 1) )
  
-
 #Articles by topic and year
 
 #Create empty dataframe with columns year, diet topic and count
@@ -136,24 +135,42 @@ count_year_by_topic <- articles %>%
   group_by(year, diet_found) %>%
   tally()
 
-count_year_by_topic$color <- NA
-count_year_by_topic <- coloriser(count_year_by_topic)
 
+#Create 5-year intervals, for that a new dataframe is used
+count_year_by_topic$year <- count_year_by_topic$year %>% as.character() %>% as.numeric()
+count_year_by_topic$n <- count_year_by_topic$n %>% as.numeric()
+count_year_by_topic$diet_found <- count_year_by_topic$diet_found %>% as.character()
+
+columns = c("year_group", "topic", "total_count") 
+five_year_by_topic = data.frame(matrix(nrow = 0, ncol = length(columns))) 
+colnames(five_year_by_topic) = columns
+
+count_year_by_topic$year_group <- cut(count_year_by_topic$year, breaks = seq(2000, 2025, by = 5))
+five_year_by_topic <- count_year_by_topic %>%
+  group_by(year_group, diet_found) %>%
+  summarize(total_count = sum(n))
+five_year_by_topic$year_group[15] <- five_year_by_topic$year_group[1]
+five_year_by_topic  <- five_year_by_topic %>%
+  arrange(year_group)
+
+
+five_year_by_topic$color <- NA
+five_year_by_topic <- coloriser(five_year_by_topic)
 # Arrange margins
 par(mar = c(5.1, 4.1, 6.1, 1.1))
 #Plot and legend articles by year and topic
-barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
-        col = count_year_by_topic$color,
-        horiz = FALSE,
-        ylab="Count", 
-        xlab="Years", 
+barplot(height=five_year_by_topic$total_count, names=five_year_by_topic$year_group, 
+        col = five_year_by_topic$color,
+        horiz = TRUE,
+        ylab="Years", 
+        xlab="Count", 
         main="Articles published by year and topic", 
-        ylim=c(0,800)
+        xlim=c(0,2500)
 ) %>% 
-text(count_year_by_topic$n+15 , paste(count_year_by_topic$n, sep="") ,cex=1) 
+  text(x = 500 , paste(five_year_by_topic$total_count, sep="") ,cex=1) 
 
-legend("topleft",
+legend("bottomright",
        c("Keto","Paleo", "Vegan"),
        fill = c("red","cyan", "chartreuse3")
 )
-
+  
