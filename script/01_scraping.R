@@ -59,8 +59,11 @@ for (i in 1:nrow(articles_df)){
 } 
 
 #Cleaning data
-articles_clean<- articles_df %>% 
-  filter(diet_check == TRUE)
+articles_clean <- articles_df %>%
+  filter(diet_check == TRUE) %>%
+  group_by(id) %>%
+  filter(n() == 1) %>%
+  ungroup()
 
 ### CLEANING UP
 
