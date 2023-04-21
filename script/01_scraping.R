@@ -171,4 +171,17 @@ text_clean$sentiment <- get_sentiment(text_clean$cleaned_text)
 
 #Save result into main df articles_clean
 articles_clean$sentiment <-NA
-articles_clean$sentiment<- text_clean$sentiment 
+articles_clean$sentiment<- text_clean$sentiment
+
+#Create plot with SA by diets
+articles_clean %>%
+  filter(str_detect(diet_found, "vegan|keto|paleo")) %>%
+  group_by(diet_found) %>%
+  summarize(sentiment = mean(sentiment, na.rm = TRUE)) %>%
+  ggplot(aes(x = diet_found, y = sentiment, fill = diet_found)) +
+  geom_col() +
+  ggtitle("Sentiment by diet") +
+  xlab("Diet") +
+  ylab("Sentiment") +
+  labs(fill = "Diets") +
+  theme_bw()
