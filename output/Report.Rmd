@@ -26,5 +26,9 @@ To gather data on articles related to specific diets, we scraped articles from T
 
 To gain insights into the popularity of these diets over time, we performed an analysis (R script 04) to visualize the number of articles related to each diet that were published in The Guardian from 2000 to 2023. This analysis helped us better understand the trends and changes in the discourse around these diets.
 
+### Arcticles published by topic
+
 ![](../figs/myplot.png)
+
+Based on the data presented in the barplot, it is clear that the vegan diet has been a popular topic in the Guardian magazine for the past two decades. With a total of 51,611 articles about veganism, it has received significantly more coverage than the paleo and keto diets combined. The paleo diet received only 1,611 articles during the same time period, while the keto diet received even less coverage with only 241 articles. 
 
