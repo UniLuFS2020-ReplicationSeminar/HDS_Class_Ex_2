@@ -84,4 +84,5 @@ plot3 <- articles_clean %>%
   ylab("Sentiment") +
   labs(fill = "Diets") +
   theme_bw()
-ggsave(file = "figs/myplot2.png", plot = plot3)
+  ggsave(path = "figs", filename = "Sentiment by diet.png")
+
