@@ -165,3 +165,6 @@ text_clean <- articles_clean %>%
   anti_join(stop_words) %>%
   group_by(id) %>%
   summarize(cleaned_text = paste(word, collapse = " "))
+
+# Perform sentiment analysis
+text_clean$sentiment <- get_sentiment(text_clean$cleaned_text) 
