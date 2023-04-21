@@ -13,7 +13,8 @@ count_by_diet <- coloriser(count_by_diet)
 # Arrange margins
 par(mar = c(5.1, 4.1, 6.1, 1.1))
 #Plot Articles published by topic
-art_by_topic <- barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
+png("figs/myplot.png")
+barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
         col = count_by_diet$color,
         horiz = TRUE,
         ylab="Topics", 
@@ -22,7 +23,7 @@ art_by_topic <- barplot(height=count_by_diet$n, names=count_by_diet$diet_found,
         xlim=c(0,5500)
 ) %>% 
   text(x = 500 , paste(count_by_diet$n, sep="", cex = 1) )
-
+dev.off()
 
 #Articles by topic and year
 
@@ -38,7 +39,8 @@ count_year_by_topic <- coloriser(count_year_by_topic)
 # Arrange margins
 par(mar = c(5.1, 4.1, 6.1, 1.1))
 #Plot and legend articles by year and topic
-act_by_year_topic <- barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
+png("figs/myplot1.png", width = 1000, height = 600)
+barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
         col = count_year_by_topic$color,
         horiz = FALSE,
         ylab="Count", 
@@ -52,7 +54,7 @@ legend("topleft",
        c("Keto","Paleo", "Vegan"),
        fill = c("red","cyan", "chartreuse3")
 )
-
+dev.off()
 ######## Sentiment analysis ##########
 
 # Clean and preprocess data for SA
@@ -71,7 +73,7 @@ articles_clean$sentiment <-NA
 articles_clean$sentiment<- text_clean$sentiment
 
 #Create plot with SA by diets
-sentiment_plot <- articles_clean %>%
+plot3 <- articles_clean %>%
   filter(str_detect(diet_found, "vegan|keto|paleo")) %>%
   group_by(diet_found) %>%
   summarize(sentiment = mean(sentiment, na.rm = TRUE)) %>%
@@ -82,3 +84,4 @@ sentiment_plot <- articles_clean %>%
   ylab("Sentiment") +
   labs(fill = "Diets") +
   theme_bw()
+ggsave(file = "figs/myplot2.png", plot = plot3)
