@@ -13,7 +13,7 @@ count_by_diet <- coloriser(count_by_diet)
 # Arrange margins
 par(mar = c(5.1, 4.1, 6.1, 1.1))
 #Plot Articles published by topic
-barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
+art_by_topic <- barplot(height=count_by_diet$n, names=count_by_diet$diet_found, 
         col = count_by_diet$color,
         horiz = TRUE,
         ylab="Topics", 
@@ -38,7 +38,7 @@ count_year_by_topic <- coloriser(count_year_by_topic)
 # Arrange margins
 par(mar = c(5.1, 4.1, 6.1, 1.1))
 #Plot and legend articles by year and topic
-barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
+act_by_year_topic <- barplot(height=count_year_by_topic$n, names=count_year_by_topic$year, 
         col = count_year_by_topic$color,
         horiz = FALSE,
         ylab="Count", 
@@ -71,7 +71,7 @@ articles_clean$sentiment <-NA
 articles_clean$sentiment<- text_clean$sentiment
 
 #Create plot with SA by diets
-articles_clean %>%
+sentiment_plot <- articles_clean %>%
   filter(str_detect(diet_found, "vegan|keto|paleo")) %>%
   group_by(diet_found) %>%
   summarize(sentiment = mean(sentiment, na.rm = TRUE)) %>%
