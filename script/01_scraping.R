@@ -168,3 +168,7 @@ text_clean <- articles_clean %>%
 
 # Perform sentiment analysis
 text_clean$sentiment <- get_sentiment(text_clean$cleaned_text) 
+
+#Save result into main df articles_clean
+articles_clean$sentiment <-NA
+articles_clean$sentiment<- text_clean$sentiment 
