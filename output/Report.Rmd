@@ -26,4 +26,5 @@ To gather data on articles related to specific diets, we scraped articles from T
 
 To gain insights into the popularity of these diets over time, we performed an analysis (R script 04) to visualize the number of articles related to each diet that were published in The Guardian from 2000 to 2023. This analysis helped us better understand the trends and changes in the discourse around these diets.
 
+![](../figs/myplot.png)
 
